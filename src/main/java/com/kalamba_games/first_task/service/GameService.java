@@ -4,12 +4,10 @@ import com.kalamba_games.first_task.dto.GameDTO;
 import com.kalamba_games.first_task.entity.GameEntity;
 import com.kalamba_games.first_task.form.Form;
 import com.kalamba_games.first_task.mapper.GameMapper;
-import com.kalamba_games.first_task.repository.CRUDRepository;
 import com.kalamba_games.first_task.repository.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -17,8 +15,7 @@ public class GameService {
 
     @Autowired
     GameRepository gameRepository;
-    @Autowired
-    CRUDRepository crudRepository;
+
 
     public List<GameDTO> gamesList() {
         List<GameEntity> games = gameRepository.findAll();
@@ -34,7 +31,6 @@ public class GameService {
         GameEntity game = new GameEntity()
                 .setGameName(form.getGameName());
         GameEntity entity = gameRepository.saveAndFlush(game);
-        crudRepository.save(entity);
         return GameMapper.gameMap(entity);
     }
 
