@@ -10,6 +10,10 @@ public class Form {
     @Size(min = 2, message = "Name is to short")
     private String gameName;
 
+    public Form() {
+
+    }
+
     public String getGameName() {
         return gameName;
     }

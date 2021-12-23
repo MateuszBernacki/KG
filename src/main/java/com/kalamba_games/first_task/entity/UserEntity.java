@@ -5,6 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @Getter
@@ -20,6 +22,18 @@ public class UserEntity {
     @Column(name = "UserName")
     private String userName;
 
+    @ManyToMany
+    @JoinTable(
+            name = "action",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "game_id")
+    )
+    private List<GameEntity> followedGames = new ArrayList<>();
+
+    public List<GameEntity> getFollowedGames() {
+        return followedGames;
+    }
+
     public String getUserName() {
         return userName;
     }
@@ -32,4 +46,10 @@ public class UserEntity {
     public Long getId() {
         return id;
     }
+
+    public void connectGame(GameEntity game){
+        followedGames.add(game);
+    }
+
+
 }

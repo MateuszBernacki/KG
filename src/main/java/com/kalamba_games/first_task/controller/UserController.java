@@ -41,7 +41,7 @@ public class UserController {
     @PostMapping("/addUser")
     public String addUser(@ModelAttribute Form form, Model model){
         UserDTO user = service.createUser(form);
-        model.addAttribute(user);
+        model.addAttribute("userName",user);
         return "user/menuUser.html";
     }
 
